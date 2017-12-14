@@ -113,4 +113,20 @@ public class UIUtils {
         Log.i(TAG, "AlertDialog --> " + msg);
         return dialog;
     }
+
+    /**
+     * 创建一个自定义布局的AlertDialog
+     *
+     * @param context
+     * @param v
+     * @return
+     */
+    public static AlertDialog createAlertDialog(Context context, View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(v);
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        return dialog;
+    }
 }
