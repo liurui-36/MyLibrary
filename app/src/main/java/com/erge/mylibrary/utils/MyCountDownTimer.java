@@ -1,6 +1,7 @@
-package com.erge.mylibrary;
+package com.erge.mylibrary.utils;
 
-import android.app.Application;
+import android.os.CountDownTimer;
+import android.widget.TextView;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +                                 <br/>
@@ -26,37 +27,32 @@ import android.app.Application;
  * 　　　　　　　　　　┃┫┫　┃┫┫                           <br/>
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +                    <br/>
  * <p>
- * Created by liurui on 2017/12/14.
+ * Created by liurui on 2017/11/15.
  */
-public class MyLibrary {
+public class MyCountDownTimer extends CountDownTimer {
+    private TextView tv;
 
-    private static MyLibrary instance;
-    private Application application;
-
-    private String fileProvider;
-
-    private MyLibrary() {
+    public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView tv) {
+        super(millisInFuture, countDownInterval);
+        this.tv = tv;
     }
 
-    public static MyLibrary getInstance() {
-        if (instance == null)
-            instance = new MyLibrary();
-        return instance;
+    //计时过程
+    @Override
+    public void onTick(long l) {
+        //防止计时过程中重复点击
+        tv.setClickable(false);
+        tv.setText(l / 1000 + "s");
+
     }
 
-    public void init(Application application) {
-        this.application = application;
-    }
-
-    public Application getApp() {
-        return application;
-    }
-
-    public String getFileProvider() {
-        return fileProvider;
-    }
-
-    public void setFileProvider(String fileProvider) {
-        this.fileProvider = fileProvider;
+    //计时完毕的方法
+    @Override
+    public void onFinish() {
+        cancel();
+        //重新给Button设置文字
+        tv.setText("重新获取");
+        //设置可点击
+        tv.setClickable(true);
     }
 }

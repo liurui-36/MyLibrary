@@ -1,6 +1,10 @@
-package com.erge.mylibrary;
+package com.erge.mylibrary.utils;
 
-import android.app.Application;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +                                 <br/>
@@ -26,37 +30,28 @@ import android.app.Application;
  * 　　　　　　　　　　┃┫┫　┃┫┫                           <br/>
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +                    <br/>
  * <p>
- * Created by liurui on 2017/12/14.
+ * Created by liurui on 2017/6/4.
  */
-public class MyLibrary {
 
-    private static MyLibrary instance;
-    private Application application;
+public class PermissionUtils {
 
-    private String fileProvider;
+    public static void checkPermission(Activity context, String[] permissions, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // 检查该权限是否已经获取
+            int status = 0;
+            for (String s : permissions) {
+                int i = ContextCompat.checkSelfPermission(context, s);
+                if (i == PackageManager.PERMISSION_DENIED) {
+                    status = PackageManager.PERMISSION_DENIED;
+                    break;
+                }
+            }
 
-    private MyLibrary() {
-    }
-
-    public static MyLibrary getInstance() {
-        if (instance == null)
-            instance = new MyLibrary();
-        return instance;
-    }
-
-    public void init(Application application) {
-        this.application = application;
-    }
-
-    public Application getApp() {
-        return application;
-    }
-
-    public String getFileProvider() {
-        return fileProvider;
-    }
-
-    public void setFileProvider(String fileProvider) {
-        this.fileProvider = fileProvider;
+            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+            if (status != PackageManager.PERMISSION_GRANTED) {
+                // 如果没有授予该权限，申请授权
+                ActivityCompat.requestPermissions(context, permissions, requestCode);
+            }
+        }
     }
 }
