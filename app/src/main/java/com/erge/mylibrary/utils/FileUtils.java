@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.erge.mylibrary.MyLibrary;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -108,6 +110,15 @@ public class FileUtils {
             sdDir = Environment.getExternalStorageDirectory();// 获取根目录
         }
         return sdDir.toString();
+    }
+
+    /**
+     * 得到软件私有目录
+     *
+     * @return
+     */
+    public static String getAppPath() {
+        return MyLibrary.getInstance().getApp().getFilesDir().getPath();
     }
 
     /**
