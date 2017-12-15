@@ -30,33 +30,26 @@ import android.app.Application;
  */
 public class MyLibrary {
 
-    private static MyLibrary instance;
-    private Application application;
+    private static Application app;
 
-    private String fileProvider;
+    private static String provider;
 
     private MyLibrary() {
     }
 
-    public static MyLibrary getInstance() {
-        if (instance == null)
-            instance = new MyLibrary();
-        return instance;
+    public static void init(Application application) {
+        app = application;
     }
 
-    public void init(Application application) {
-        this.application = application;
+    public static Application getApp() {
+        return app;
     }
 
-    public Application getApp() {
-        return application;
+    public static String getFileProvider() {
+        return provider;
     }
 
-    public String getFileProvider() {
-        return fileProvider;
-    }
-
-    public void setFileProvider(String fileProvider) {
-        this.fileProvider = fileProvider;
+    public static void setFileProvider(String fileProvider) {
+        provider = fileProvider;
     }
 }

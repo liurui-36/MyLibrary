@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.erge.mylibrary.MyLibrary;
@@ -48,7 +51,7 @@ public class UIUtils {
     public static void toastInfo(String message) {
         if (message != null) {
             if (mToast == null) {
-                mToast = Toast.makeText(MyLibrary.getInstance().getApp(), message, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(MyLibrary.getApp(), message, Toast.LENGTH_SHORT);
             } else {
                 mToast.setText(message);
                 mToast.setDuration(Toast.LENGTH_SHORT);
@@ -59,7 +62,7 @@ public class UIUtils {
     }
 
     public static void toastInfo(int strRes) {
-        String msg = MyLibrary.getInstance().getApp().getResources().getString(strRes);
+        String msg = MyLibrary.getApp().getResources().getString(strRes);
         toastInfo(msg);
     }
 
@@ -128,5 +131,43 @@ public class UIUtils {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         return dialog;
+    }
+
+    /**
+     * 创建一个popWindow
+     *
+     * @param activity
+     * @param view
+     * @return
+     */
+    public static PopupWindow createWindow(Activity activity, View view) {
+        PopupWindow window = new PopupWindow(activity);
+        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        window.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        window.setContentView(view);
+        window.setBackgroundDrawable(new BitmapDrawable());
+        window.setOutsideTouchable(false);
+        window.setFocusable(true);
+        window.showAsDropDown(activity.getWindow().getDecorView());
+        return window;
+    }
+
+    /**
+     * 创建一个popWindow
+     *
+     * @param activity
+     * @param view
+     * @return
+     */
+    public static PopupWindow createWindow(Activity activity, View view, int width, int height, View dropView, int x, int y) {
+        PopupWindow window = new PopupWindow(activity);
+        window.setWidth(width);
+        window.setHeight(height);
+        window.setContentView(view);
+        window.setBackgroundDrawable(new BitmapDrawable());
+        window.setOutsideTouchable(false);
+        window.setFocusable(true);
+        window.showAsDropDown(dropView, x, y);
+        return window;
     }
 }

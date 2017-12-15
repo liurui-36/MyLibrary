@@ -118,7 +118,7 @@ public class FileUtils {
      * @return
      */
     public static String getAppPath() {
-        return MyLibrary.getInstance().getApp().getFilesDir().getPath();
+        return MyLibrary.getApp().getFilesDir().getPath();
     }
 
     /**

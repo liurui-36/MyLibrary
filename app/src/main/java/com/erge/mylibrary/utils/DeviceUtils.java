@@ -53,9 +53,9 @@ public class DeviceUtils {
      * 0为移动网络、1为WIFI、-1为无网络
      */
     public static int getNetworkType() {
-        ConnectivityManager manager = (ConnectivityManager) MyLibrary.getInstance().getApp()
+        ConnectivityManager manager = (ConnectivityManager) MyLibrary.getApp()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        @SuppressLint("MissingPermission") NetworkInfo netInfo = manager.getActiveNetworkInfo();
+        NetworkInfo netInfo = manager.getActiveNetworkInfo();
         if (netInfo != null) {
             if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE
                     || netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
@@ -76,7 +76,7 @@ public class DeviceUtils {
      */
     @SuppressLint("MissingPermission")
     public static String getImei() {
-        TelephonyManager manager = (TelephonyManager) MyLibrary.getInstance().getApp()
+        TelephonyManager manager = (TelephonyManager) MyLibrary.getApp()
                 .getSystemService(Context.TELEPHONY_SERVICE);
         Log.i(TAG, "获取IMEI:" + manager.getDeviceId());
         return manager.getDeviceId();
@@ -88,8 +88,8 @@ public class DeviceUtils {
     public static String getAppVersionName() {
         String versionName = "";
         try {
-            PackageManager pm = MyLibrary.getInstance().getApp().getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(MyLibrary.getInstance().getApp().getPackageName(), 0);
+            PackageManager pm = MyLibrary.getApp().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(MyLibrary.getApp().getPackageName(), 0);
             versionName = pi.versionName;
             Log.i(TAG, "获取当前程序版本名称:versionName=" + versionName);
             if (versionName == null || versionName.length() <= 0) {
@@ -107,8 +107,8 @@ public class DeviceUtils {
     public static int getAppVersionCode() {
         int versionCode = -1;
         try {
-            PackageManager pm = MyLibrary.getInstance().getApp().getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(MyLibrary.getInstance().getApp().getPackageName(), 0);
+            PackageManager pm = MyLibrary.getApp().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(MyLibrary.getApp().getPackageName(), 0);
             versionCode = pi.versionCode;
             Log.i(TAG, "返回当前程序版本号:versionCode=" + versionCode);
         } catch (Exception e) {
@@ -128,13 +128,13 @@ public class DeviceUtils {
         //判断是否是AndroidN以及更高的版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(MyLibrary.getInstance().getApp(), MyLibrary.getInstance().getFileProvider(), apk);
+            Uri contentUri = FileProvider.getUriForFile(MyLibrary.getApp(), MyLibrary.getFileProvider(), apk);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        MyLibrary.getInstance().getApp().startActivity(intent);
+        MyLibrary.getApp().startActivity(intent);
     }
 
     /**
@@ -160,7 +160,7 @@ public class DeviceUtils {
         }
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context.getApplicationContext(), MyLibrary.getInstance().getFileProvider(), file);
+            uri = FileProvider.getUriForFile(context.getApplicationContext(), MyLibrary.getFileProvider(), file);
         } else {
             uri = Uri.fromFile(file);
         }
@@ -193,7 +193,7 @@ public class DeviceUtils {
     public static void callPhone(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MyLibrary.getInstance().getApp().startActivity(intent);
+        MyLibrary.getApp().startActivity(intent);
     }
 
 }
