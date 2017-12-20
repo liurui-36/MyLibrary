@@ -2,6 +2,8 @@ package com.erge.mylibrary;
 
 import android.app.Application;
 
+import com.lzy.okgo.OkGo;
+
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +                                 <br/>
  * 　　　　　　　┏┛┻━━━┛┻┓ + +                                  <br/>
@@ -39,6 +41,7 @@ public class MyLibrary {
 
     public static void init(Application application) {
         app = application;
+        OkGo.getInstance().init(application);
     }
 
     public static Application getApp() {
