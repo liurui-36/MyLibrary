@@ -2,11 +2,14 @@ package com.erge.mylibrary.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -169,5 +172,35 @@ public class UIUtils {
         window.setFocusable(true);
         window.showAsDropDown(dropView, x, y);
         return window;
+    }
+
+    /**
+     * 创建一个Notification
+     *
+     * @param context
+     * @param smallIcon
+     * @param title
+     * @param msg
+     * @param id
+     * @param intent
+     * @param autoCancel
+     */
+    public static void createNotification(Context context, int smallIcon, String title, String msg, int id, PendingIntent intent, boolean autoCancel) {
+        //获取NotificationManager实例
+        NotificationManager mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        //实例化NotificationCompat.Builde并设置相关属性
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                //设置小图标
+                .setSmallIcon(smallIcon)
+                //设置通知标题
+                .setContentTitle(title)
+                //设置通知内容
+                .setContentText(msg)
+                .setContentIntent(intent)
+                .setAutoCancel(autoCancel);
+        //设置通知时间，默认为系统发出通知的时间，通常不用设置
+        //.setWhen(System.currentTimeMillis());
+        //通过builder.build()方法生成Notification对象,并发送通知,id=1
+        mNotifyManager.notify(id, builder.build());
     }
 }
