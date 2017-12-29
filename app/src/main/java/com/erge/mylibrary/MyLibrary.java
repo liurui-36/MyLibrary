@@ -39,9 +39,11 @@ public class MyLibrary {
     private MyLibrary() {
     }
 
-    public static void init(Application application) {
+    public static void init(Application application, boolean debug) {
         app = application;
-        OkGo.getInstance().init(application);
+        OkGo.init(application);
+        if (debug)
+            OkGo.getInstance().debug("OKGO");
     }
 
     public static Application getApp() {
