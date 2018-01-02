@@ -3,6 +3,7 @@ package com.erge.mylibrary.utils;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.webkit.MimeTypeMap;
 
 import com.erge.mylibrary.MyLibrary;
 
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Locale;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +                                 <br/>
@@ -227,5 +229,42 @@ public class FileUtils {
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         bos.flush();
         bos.close();
+    }
+
+    /**
+     * 得到文件的 mineType
+     */
+    public static String getMimeType(File file) {
+        String suffix = getSuffix(file);
+        if (suffix == null) {
+            return "file/*";
+        }
+        String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(suffix);
+        if (type != null || !type.isEmpty()) {
+            return type;
+        }
+        return "file/*";
+    }
+
+    /**
+     * 得到文件格式
+     *
+     * @param file
+     * @return
+     */
+    private static String getSuffix(File file) {
+        if (file == null || !file.exists() || file.isDirectory()) {
+            return null;
+        }
+        String fileName = file.getName();
+        if (fileName.equals("") || fileName.endsWith(".")) {
+            return null;
+        }
+        int index = fileName.lastIndexOf(".");
+        if (index != -1) {
+            return fileName.substring(index + 1).toLowerCase(Locale.US);
+        } else {
+            return null;
+        }
     }
 }
