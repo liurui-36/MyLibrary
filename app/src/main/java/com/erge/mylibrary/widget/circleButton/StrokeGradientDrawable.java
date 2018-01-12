@@ -1,4 +1,4 @@
-package com.erge.mylibrary.widget.circle_button;
+package com.erge.mylibrary.widget.circleButton;
 
 import android.graphics.drawable.GradientDrawable;
 

@@ -1,4 +1,4 @@
-package com.erge.mylibrary.widget.select_tab;
+package com.erge.mylibrary.widget.selectTab;
 
 import android.content.Context;
 import android.content.res.TypedArray;
