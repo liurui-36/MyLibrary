@@ -1,5 +1,6 @@
 package com.erge.mylibrary.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -11,9 +12,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.TypedValue;
 
 import com.erge.mylibrary.MyLibrary;
 
@@ -189,11 +192,22 @@ public class DeviceUtils {
      *
      * @param phoneNumber
      */
-    @SuppressLint("MissingPermission")
     public static void callPhone(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (ActivityCompat.checkSelfPermission(MyLibrary.getApp(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         MyLibrary.getApp().startActivity(intent);
+    }
+
+    public static int dp2px(int dpval) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpval, MyLibrary.getApp().getResources().getDisplayMetrics());
+    }
+
+    public static int px2dp(float pxValue) {
+        final float scale = MyLibrary.getApp().getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 
 }
