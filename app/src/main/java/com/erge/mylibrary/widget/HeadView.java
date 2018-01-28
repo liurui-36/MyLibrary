@@ -3,8 +3,6 @@ package com.erge.mylibrary.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +41,6 @@ import com.erge.mylibrary.utils.RxActivityTool;
  * <p>
  * Created by liurui on 2018/1/5.
  */
-@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class HeadView extends RelativeLayout {
 
     private ImageView ivLeft;
@@ -78,6 +75,7 @@ public class HeadView extends RelativeLayout {
 
     private boolean clickLeftFinish;
     private boolean showBottomLine;
+    private int bottomLineColor;
 
     public HeadView(Context context) {
         this(context, null);
@@ -114,7 +112,7 @@ public class HeadView extends RelativeLayout {
         leftText = ta.getString(R.styleable.HeadView_leftText);
         rightText = ta.getString(R.styleable.HeadView_rightText);
         title = ta.getString(R.styleable.HeadView_title);
-        backgroundColor = ta.getInteger(R.styleable.HeadView_backgroundColor, Color.BLACK);
+        backgroundColor = ta.getInteger(R.styleable.HeadView_backgroundColor, Color.WHITE);
         backgroundImg = ta.getInteger(R.styleable.HeadView_backgroundImg, -1);
         leftTextColor = ta.getColor(R.styleable.HeadView_leftTextColor, Color.BLACK);
         rightTextColor = ta.getColor(R.styleable.HeadView_rightTextColor, Color.BLACK);
@@ -124,6 +122,7 @@ public class HeadView extends RelativeLayout {
         titleTextSize = ta.getDimension(R.styleable.HeadView_titleTextSize, 30f);
         clickLeftFinish = ta.getBoolean(R.styleable.HeadView_clickLeftFinish, false);
         showBottomLine = ta.getBoolean(R.styleable.HeadView_showBottomLine, false);
+        bottomLineColor = ta.getColor(R.styleable.HeadView_bottomLineColor, Color.GRAY);
         ta.recycle();
     }
 
@@ -154,6 +153,7 @@ public class HeadView extends RelativeLayout {
             });
         }
         line.setVisibility(showBottomLine ? VISIBLE : GONE);
+        line.setBackgroundColor(bottomLineColor);
     }
 
     public void setLeftClick(OnClickListener leftClick) {
@@ -180,6 +180,7 @@ public class HeadView extends RelativeLayout {
     }
 
     public void setBottomLineColor(int color) {
+        this.backgroundColor = color;
         line.setBackgroundColor(color);
     }
 }

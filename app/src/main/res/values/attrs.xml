@@ -7,6 +7,7 @@
     </declare-styleable>
 
     <declare-styleable name="HeadView">
+
         <attr name="backgroundColor" format="color"/>
         <attr name="backgroundImg" format="reference"/>
 
@@ -26,6 +27,7 @@
 
         <attr name="clickLeftFinish" format="boolean"/>
         <attr name="showBottomLine" format="boolean"/>
+        <attr name="bottomLineColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="SelectTabView">
