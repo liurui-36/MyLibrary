@@ -19,7 +19,7 @@ public class ThreadPoolUtils {
     // 最大线程数
     private static final int maxThreadNum = Integer.MAX_VALUE;
     // 非核心线程闲置超时时长
-    private static final long keepAliveTime = 30 * 1000L;
+    private static final long keepAliveTime = 30L;
     // keepAliveTime的单位
     private static final TimeUnit unit = TimeUnit.SECONDS;
     // 任务队列
