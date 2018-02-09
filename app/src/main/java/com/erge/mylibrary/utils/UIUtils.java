@@ -113,6 +113,7 @@ public class UIUtils {
         if (!TextUtils.isEmpty(msg)) builder.setMessage(msg);
         if (!TextUtils.isEmpty(okBtnTxt)) builder.setPositiveButton(okBtnTxt, okListener);
         if (!TextUtils.isEmpty(cancelTxt)) builder.setNegativeButton(cancelTxt, cancelListener);
+        builder.setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(canceledOnTouchOutside);
         dialog.show();
@@ -130,6 +131,7 @@ public class UIUtils {
     public static AlertDialog createAlertDialog(Context context, View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(v);
+        builder.setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
