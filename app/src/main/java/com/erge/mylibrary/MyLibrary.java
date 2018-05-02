@@ -3,6 +3,8 @@ package com.erge.mylibrary;
 import android.app.Application;
 
 import com.lzy.okgo.OkGo;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +                                 <br/>
@@ -36,14 +38,19 @@ public class MyLibrary {
 
     private static String provider;
 
+    public static boolean DEBUG;
+
     private MyLibrary() {
     }
 
     public static void init(Application application, boolean debug) {
         app = application;
         OkGo.init(application);
-        if (debug)
+        DEBUG = debug;
+        if (debug) {
             OkGo.getInstance().debug("OKGO");
+            Logger.addLogAdapter(new AndroidLogAdapter());
+        }
     }
 
     public static Application getApp() {
