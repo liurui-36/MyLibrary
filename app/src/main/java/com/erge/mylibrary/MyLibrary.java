@@ -43,8 +43,9 @@ public class MyLibrary {
     private MyLibrary() {
     }
 
-    public static void init(Application application, boolean debug) {
+    public static void init(Application application, String fileProvider,boolean debug) {
         app = application;
+        provider = fileProvider;
         OkGo.init(application);
         DEBUG = debug;
         if (debug) {
@@ -59,9 +60,5 @@ public class MyLibrary {
 
     public static String getFileProvider() {
         return provider;
-    }
-
-    public static void setFileProvider(String fileProvider) {
-        provider = fileProvider;
     }
 }
