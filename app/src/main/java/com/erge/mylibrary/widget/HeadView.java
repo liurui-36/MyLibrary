@@ -3,6 +3,7 @@ package com.erge.mylibrary.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,5 +183,45 @@ public class HeadView extends RelativeLayout {
     public void setBottomLineColor(int color) {
         this.backgroundColor = color;
         line.setBackgroundColor(color);
+    }
+
+    public void setLeftIcon(int res){
+        ivLeft.setImageResource(res);
+    }
+
+    public void setLeftIcon(Drawable drawable){
+        ivLeft.setImageDrawable(drawable);
+    }
+
+    public void setRightIcon(int res){
+        ivRight.setImageResource(res);
+    }
+
+    public void setRightIcon(Drawable drawable){
+        ivRight.setImageDrawable(drawable);
+    }
+
+    public ImageView getIvLeft() {
+        return ivLeft;
+    }
+
+    public TextView getTvLeft() {
+        return tvLeft;
+    }
+
+    public ImageView getIvRight() {
+        return ivRight;
+    }
+
+    public TextView getTvRight() {
+        return tvRight;
+    }
+
+    public TextView getTvTitle() {
+        return tvTitle;
+    }
+
+    public View getLine() {
+        return line;
     }
 }
