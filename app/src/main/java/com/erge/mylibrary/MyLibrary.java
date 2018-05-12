@@ -43,7 +43,7 @@ public class MyLibrary {
     private MyLibrary() {
     }
 
-    public static void init(Application application, String fileProvider,boolean debug) {
+    public static void init(Application application, String fileProvider, boolean debug) {
         app = application;
         provider = fileProvider;
         OkGo.init(application);
